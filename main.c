@@ -57,9 +57,11 @@ int main(int argc, const char * argv[]) {
     //1-2. loading each patient informations
     while(3==fscanf(fp,"%d %d %d",&pIndex,&age,&time))
     {
-    	for
+    	int i
+    	
+    	for(i=0;i<N_HISTORY;i++)
 		{
-		    fscanf(fp,"%d %d %d %d",&pIndex,&age,&time,&placeHist);
+		    fscanf(fp,"%d %d %d %d",&pIndex,&age,&time,&placeHist[i]);
 	    }
 	    
 		ifct_element=ifctele_genElement(pIndex,age,time,placeHist);
@@ -104,8 +106,8 @@ int main(int argc, const char * argv[]) {
             	printf("Patient index : \n");
             	scanf("%d",&index);
             	ifct_element=ifctdb_getData(index);
-            	ifctele_printElement(ifct_element);
             	printf("--------------------------------------------\n");
+            	ifctele_printElement(ifct_element);
             	printf("--------------------------------------------\n");
                 
                 break;
@@ -117,13 +119,15 @@ int main(int argc, const char * argv[]) {
                 break;
                 
             case MENU_AGE:
-            	printf("Age : \n");
-            	scanf("%d",&age);
+            	printf("Minimal age : \n");
+            	scanf("%d",&minAge);
+            	printf("Maximal age : \n");
+            	scanf("%d",&maxAge);
                 
                 break;
                 
             case MENU_TRACK:
-                    
+            	
                 break;
                 
             
@@ -139,6 +143,7 @@ int main(int argc, const char * argv[]) {
 				
 				index=infester;
 			}
+			printf("The first infester is %d\n",pf);
                 
             default:
                 printf("[ERROR Wrong menu selection! (%i), please choose between 0 ~ 4\n",menu_selection);
