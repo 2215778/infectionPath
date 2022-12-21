@@ -106,7 +106,6 @@ typedef struct ifs_ele {
 } ifs_ele_t;
 
 
-
 void* ifctele_genElement(int index, int age, unsigned int detected_time, int history_place[N_HISTORY])
 {
 	ifs_ele_t* ptr;
@@ -128,6 +127,17 @@ int ifctele_getAge(void* obj)
 int ifctele_getHistPlaceIndex(void* obj, int index);
 unsigned int ifctele_getinfestedTime(void* obj);
 
+int convertTimeToIndex(int time, int infestedTime)
+{
+	int index=-1;
+	
+	if(time<=infestedTime && infestedTime-N_HISTORY)
+	{
+		index=N_HISTORY-(infestedTime-time)-1;
+	}
+	
+	return index;
+}
 
 //char* ifctele_getPlaceName(int placeIndex);
 
@@ -138,8 +148,6 @@ void ifctele_printElement(void* obj)
 	
 	printf("Age : %i\n", ptr->age);
 }
-
-
 
 
 char* ifctele_getPlaceName(int placeIndex)
