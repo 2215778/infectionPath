@@ -18,18 +18,6 @@
 
 #define TIME_HIDE           2
 
-int convertTimeToIndex(int time, int infestedTime)
-{
-	int index=-1;
-	
-	if(time<=infestedTime && infestedTime-N_HISTORY)
-	{
-		index=N_HISTORY-(infestedTime-time)-1;
-	}
-	
-	return index;
-}
-
 int trackInfester(int patient_no, int *detected_time, int *place);
 int main(int argc, const char * argv[]) {
     
@@ -97,6 +85,7 @@ int main(int argc, const char * argv[]) {
         switch(menu_selection)
         {
         	int index, place, age;
+        	int i;
         	
             case MENU_EXIT:
                 printf("Exiting the program... Bye bye.\n");
@@ -114,7 +103,10 @@ int main(int argc, const char * argv[]) {
                 
             case MENU_PLACE:
                 printf("Place : \n");
-                scanf("%c",&place)
+                scanf("%c",&Place)
+                
+                ifct_element=ifctdb_getDate(i);
+            	Place=ifctele_getHistPlaceIndex(ifct_element,N_HISTORY-1);
                 
                 break;
                 
@@ -123,6 +115,14 @@ int main(int argc, const char * argv[]) {
             	scanf("%d",&minAge);
             	printf("Maximal age : \n");
             	scanf("%d",&maxAge);
+            	
+            	ifct_element=ifctdb_getDate(i);
+            	Age=ifctele_getAge(ifct_element);
+            	
+            	if(Age>=minAge && Age<=maxAge)
+            	    printf("--------------------------------------------\n");
+            	    ifctele_printElement(ifct_element);
+            	    printf("--------------------------------------------\n");
                 
                 break;
                 
